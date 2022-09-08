@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useRouter } from "next/dist/client/router";
-import Head from "next/head"
+import Head from "next/head";
 const Splash = () => {
   const AudioRef = useRef(null);
   const router = useRouter();
@@ -12,15 +12,15 @@ const Splash = () => {
       router.push("/home");
     }, 4500);
   });
-   
+
   // Credit:  https://codepen.io/claudio_bonfati/pen/mdryxPv by claudio bonfati
-  
+
   return (
     <>
-    <Head>
-    <title>Tudum </title>
-    </Head>
-      <div className=" h-screen">
+      <Head>
+        <title>Home</title>
+      </Head>
+      <div className="h-screen">
         <audio ref={AudioRef} src="/tadum.mp3"></audio>
         <div id="container">
           <netflixintro letter="N">

@@ -18,7 +18,7 @@ export default function Home() {
     AOS.init();
 
     if (user != null) {
-      router.push("/splash");
+      router.push("/home");
     }
   });
   return (

@@ -21,7 +21,7 @@ function SignUp() {
     }
   };
   if (user != null) {
-    router.push("/splash");
+    router.push("/home");
   }
   return (
     <div>

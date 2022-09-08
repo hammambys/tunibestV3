@@ -6,7 +6,8 @@ import { BsPlayFill } from "react-icons/bs";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { useUserContext } from "../context/userContext";
-const Card = ({ data }) => {
+
+export default function Card({ data }) {
   const { isModal, setIsModal } = useUserContext();
   const { ModalData, setModalData } = useUserContext();
   const router = useRouter();
@@ -34,11 +35,12 @@ const Card = ({ data }) => {
         className="relative flex justify-center text-white"
       >
         <Image
-          src={`${BASE_IMG_URL_500w}${data.backdrop_path}`}
+          src={`${BASE_IMG_URL}${data.img_id}`}
           alt={data.title}
           className=" rounded-lg"
           width={350}
           height={200}
+          priority={true}
         />
 
         <div
@@ -67,6 +69,4 @@ const Card = ({ data }) => {
       {/* modal */}
     </>
   );
-};
-
-export default Card;
+}

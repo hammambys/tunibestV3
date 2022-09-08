@@ -11,6 +11,7 @@ import { useUserContext } from "../context/userContext";
 import AOS from "aos";
 import "aos/dist/aos.css"; // You can also use <link> for styles
 import Modal from "../components/Modal";
+
 // ..
 function HomePage() {
   const { logOutUser, user } = useUserContext();

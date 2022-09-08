@@ -7,7 +7,6 @@ import { BASE_IMG_URL_500w } from "../common/requests";
 const Modal = ({ data }) => {
   const { isModal, setIsModal } = useUserContext();
   const { ModalData, setModalData } = useUserContext();
-  console.log(ModalData);
   const router = useRouter();
   return (
     <div>
