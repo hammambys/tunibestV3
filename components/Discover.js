@@ -1,11 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Slider from "react-slick";
 import { settings } from "../common/settings";
-import movieApi from "../common/apis/movieApi";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Card from "./Card";
-import { APIkey } from "../common/apis/tmdbApiKey";
-import SearchCard from "./SearchCard";
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
 

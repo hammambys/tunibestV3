@@ -5,6 +5,8 @@ import { IoIosArrowDown } from "react-icons/io";
 import { BsPlayFill } from "react-icons/bs";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import Link from "next/link";
+
 import { useUserContext } from "../context/userContext";
 
 export default function Card({ data }) {
@@ -34,39 +36,17 @@ export default function Card({ data }) {
         onMouseLeave={() => setIsHover(false)}
         className="relative flex justify-center text-white"
       >
-        <Image
-          src={`${BASE_IMG_URL}${data.img_id}`}
-          alt={data.title}
-          className=" rounded-lg"
-          width={350}
-          height={200}
-          priority={true}
-        />
-
-        <div
-          className={`${
-            isHover ? "absolute transition-all" : "hidden transition-all"
-          } transition-all left-10  sm:left-5 flex items-center space-x-2 bottom-5`}
-        >
-          <div
-            onClick={() => router.push("/splash")}
-            className="px-4 py-2 font-bold flex justify-center items-center space-x-1 rounded-md bg-[#d41420] "
-          >
-            <div>Play</div>
-            <BsPlayFill />
-          </div>
-          <div
-            onClick={() => {
-              setModalData(data);
-              setIsModal(true);
-            }}
-            className=" border-2 p-1 rounded-full  text-2xl"
-          >
-            <IoIosArrowDown />
-          </div>
-        </div>
+        <Link href={`/${data.id}`}>
+          <Image
+            src={`${BASE_IMG_URL}${data.img_id}`}
+            alt={data.title}
+            className=" rounded-lg"
+            width={350}
+            height={200}
+            priority={true}
+          />
+        </Link>
       </div>
-      {/* modal */}
     </>
   );
 }
