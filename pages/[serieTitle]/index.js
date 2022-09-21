@@ -9,22 +9,21 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import { useRouter } from "next/router";
-import Header from "../../components/Header";
-import Banner from "../../components/Banner";
-import DusraFooter from "../../components/DusraFooter";
-import Card from "../../components/Card";
 import EpisodeCard from "../../components/EpisodeCard";
 
 export default function SeriePage() {
-  const router = useRouter();
-  const { id } = router.query;
   const [serie, setSerie] = useState([]);
   const [episodes, setEpisodes] = useState([]);
+  const router = useRouter();
+  const { serieTitle } = router.query;
 
   useEffect(() => {
+    if (!serieTitle) {
+      return;
+    }
     const q = query(
       collection(db, "series"),
-      where("title", "==", "choufli-hal")
+      where("title", "==", `${serieTitle}`)
     );
     onSnapshot(q, (querySnapshot) => {
       setSerie(
@@ -34,14 +33,7 @@ export default function SeriePage() {
         }))
       );
     });
-    const episodesRef = collection(
-      db,
-      "series",
-      "1",
-      "seasons",
-      "1",
-      "episodes"
-    );
+    const episodesRef = collection(db, "episodes");
     onSnapshot(episodesRef, (querySnapshot) => {
       setEpisodes(
         querySnapshot.docs.map((doc) => ({
@@ -50,22 +42,16 @@ export default function SeriePage() {
         }))
       );
     });
-  }, []);
+  }, [serieTitle]);
 
-  console.log(episodes);
-  console.log(serie);
-
-  /*useEffect(() => {
-    setEpisodes(serie[0].seasons[0].episodes);
-  }, []);*/
   return (
-    <div className=" bg-black overflow-x-hidden">
-      <Header />
-
-      {serie.map((serie) => (
-        <EpisodeCard key={serie.id} data={serie.data} />
-      ))}
-      <DusraFooter />
+    <div className="">
+      <h1 className="text-center  inset-2/4 mb-10">Episode list</h1>
+      <div className="flex p-5">
+        {episodes.map((episode) => (
+          <EpisodeCard key={episode.id} data={episode.data} />
+        ))}
+      </div>
     </div>
   );
 }

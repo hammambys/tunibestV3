@@ -1,34 +1,22 @@
-import React, { useState } from "react";
-import { BASE_IMG_URL } from "../common/requests";
+import React from "react";
 import { useRouter } from "next/router";
-import Image from "next/image";
 import Link from "next/link";
-import { useUserContext } from "../context/userContext";
 
 export default function EpisodeCard({ data }) {
-  const [isHover, setIsHover] = useState(false);
+  const router = useRouter();
+  const { serieTitle } = router.query;
   if (!data) {
     return <div> Loading </div>;
   }
   return (
     <>
-      <Link href={`/${data.title}/${data.episode_title}`}>
-        <div
-          onMouseEnter={() => setIsHover(true)}
-          onMouseLeave={() => setIsHover(false)}
-          className="relative flex justify-center text-white"
-        >
-          <p>{data.title} </p>
-          <Image
-            src={`${BASE_IMG_URL}${data.img_id}`}
-            alt={data.title}
-            className=" rounded-lg"
-            width={350}
-            height={200}
-            priority={true}
-          />
+      <div className="cursor-pointer relative text-black  m-10">
+        <div className="p-5 bg-white">
+          <Link href={`/${serieTitle}/${data.number}`}>
+            <div>{data.number}</div>
+          </Link>
         </div>
-      </Link>
+      </div>
     </>
   );
 }

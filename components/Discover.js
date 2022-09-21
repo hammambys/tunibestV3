@@ -32,7 +32,6 @@ class Discover extends React.Component {
     this._isMounted = true;
     getSeries().then((res) => {
       this.setState({ series: [...res] });
-      console.log(this.state.series);
     });
   }
   componentWillUnmount() {

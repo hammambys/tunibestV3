@@ -35,7 +35,7 @@ function HomePage() {
   return (
     <>
       <Head>
-        <title>Netflix - Watch TV shows Online, Watch Movies Online</title>
+        <title>Tunibest</title>
         <link
           rel="stylesheet"
           type="text/css"
@@ -48,12 +48,8 @@ function HomePage() {
           href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
         />
       </Head>
-      <div className=" bg-black overflow-x-hidden">
-        <Header />
-        <Banner />
+      <div className=" ">
         <Discover />
-        <DusraFooter />
-        <Modal />
       </div>
     </>
   );
