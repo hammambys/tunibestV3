@@ -12,7 +12,7 @@ export default function EpisodeCard({ data }) {
     <>
       <div className="cursor-pointer relative text-black  m-10">
         <div className="p-5 bg-white">
-          <Link href={`/${serieTitle}/${data.number}`}>
+          <Link href={`/series/${serieTitle}/${data.number}`}>
             <div>{data.number}</div>
           </Link>
         </div>

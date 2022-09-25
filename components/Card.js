@@ -23,7 +23,7 @@ export default function Card({ data }) {
         onMouseLeave={() => setIsHover(false)}
         className="relative flex justify-center text-white cursor-pointer"
       >
-        <Link href={`/${data.title}`}>
+        <Link href={`/series/${data.title}`}>
           <Image
             src={`${BASE_IMG_URL}${data.img_id}`}
             alt={data.title}

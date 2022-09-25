@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { db } from "../../firebase";
+import { db } from "../../../firebase";
 import {
   doc,
   getDoc,
@@ -9,10 +9,9 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import { useRouter } from "next/router";
-import EpisodeCard from "../../components/EpisodeCard";
+import EpisodeCard from "../../../components/EpisodeCard";
 
 export default function SeriePage() {
-  const [serie, setSerie] = useState([]);
   const [episodes, setEpisodes] = useState([]);
   const router = useRouter();
   const { serieTitle } = router.query;
@@ -21,19 +20,11 @@ export default function SeriePage() {
     if (!serieTitle) {
       return;
     }
-    const q = query(
-      collection(db, "series"),
-      where("title", "==", `${serieTitle}`)
+
+    const episodesRef = query(
+      collection(db, "episodes"),
+      where("serie_name", "==", `${serieTitle}`)
     );
-    onSnapshot(q, (querySnapshot) => {
-      setSerie(
-        querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          data: doc.data(),
-        }))
-      );
-    });
-    const episodesRef = collection(db, "episodes");
     onSnapshot(episodesRef, (querySnapshot) => {
       setEpisodes(
         querySnapshot.docs.map((doc) => ({

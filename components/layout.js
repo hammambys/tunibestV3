@@ -1,5 +1,5 @@
 import Head from "next/head";
-import DusraFooter from "./DusraFooter";
+import DusraFooter from "./Footer";
 import Header from "./Header";
 
 export default function Layout({ children }) {

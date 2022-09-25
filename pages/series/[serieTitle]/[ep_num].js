@@ -1,14 +1,13 @@
 import { collection, onSnapshot, query, where } from "firebase/firestore";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { db } from "../../firebase";
+import { db } from "../../../firebase";
 
 export default function Watch() {
+  const [serie, setSerie] = useState([]);
   const [episode, setEpisode] = useState([]);
   const router = useRouter();
   const { serieTitle, ep_num } = router.query;
-  //const [previous, setPrevious] = useState(ep_num ? 0 : null);
 
   useEffect(() => {
     const q = query(
@@ -24,25 +23,32 @@ export default function Watch() {
         }))
       );
     });
+
+    const serieRef = query(
+      collection(db, "series"),
+      where("title", "==", `${serieTitle}`)
+    );
+    onSnapshot(serieRef, (querySnapshot) => {
+      setSerie(
+        querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          data: doc.data(),
+        }))
+      );
+    });
   }, [serieTitle, ep_num]);
-  if (!episode[0]) {
+  if (!episode[0] || !serie[0]) {
     return <div> Loading </div>;
   }
-  /*const epNum = episode[0].data.number;
-  if (epNum != 1) {
-    setPrevious(epNum - 1);
-  } else {
-    setPrevious(0);
-  }*/
-
+  console.log(serie);
   return (
     <div>
       <div className="text-center">Watch</div>
       <div className="flex">
-        {episode[0].data.previous != 0 && (
+        {episode[0].data.number > 1 && (
           <button
             onClick={() =>
-              router.push(`/${serieTitle}/${episode[0].data.previous}`)
+              router.push(`/series/${serieTitle}/${episode[0].data.number - 1}`)
             }
           >
             Previous
@@ -55,10 +61,10 @@ export default function Watch() {
             src={`https://www.youtube.com/embed/${episode[0].data.video_id}`}
           ></iframe>
         </div>
-        {episode[0].data.next != 0 && (
+        {episode[0].data.number < serie[0].data.length && (
           <button
             onClick={() =>
-              router.push(`/${serieTitle}/${episode[0].data.next}`)
+              router.push(`/series/${serieTitle}/${episode[0].data.number + 1}`)
             }
           >
             Next
