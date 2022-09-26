@@ -65,13 +65,16 @@ function Header() {
                   Home
                 </p>
                 <p
-                  onClick={() => router.push("/movies")}
+                  onClick={() => router.push("/add-serie")}
                   className=" cursor-pointer hover:scale-105 transition-all"
                 >
-                  Movies
+                  Add serie
                 </p>
-                <p className=" cursor-pointer hover:scale-105 transition-all">
-                  Tv Shows
+                <p
+                  onClick={() => router.push("/series")}
+                  className=" cursor-pointer hover:scale-105 transition-all"
+                >
+                  Series
                 </p>
               </div>
             </div>
